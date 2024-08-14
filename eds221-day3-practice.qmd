@@ -1,0 +1,269 @@
+---
+title: "EDS 221 Day 3 Practice"
+author: "Tom Gibbens-Matsuyama"
+format: html
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+pinyon_pine <- 14
+lodgepole_pine <- 46
+
+# some logical expressions
+pinyon_pine == 10
+pinyon_pine < lodgepole_pine
+
+pinyon_pine != 25 # != "is not equal"
+```
+
+
+## Conditional ----
+
+```{r}
+burritos <- 2.4
+
+# write a short 'if' statement
+if (burritos > 2) {
+  print("I Love Burritos")
+}
+```
+
+```{r}
+pika <- 89.1
+
+if (pika > 60) {
+  print("Mega Pika!")
+} else
+  print("normal pika")
+
+```
+
+```{r}
+marmot <- 2.8
+
+if (marmot < 0.5) {
+  print("a small marmot")
+} else if (marmot >= 0.5 & marmot < 3){
+  print("a medium marmot")
+} else 
+  print("a large marmot")
+```
+
+## Load stringr package ----
+```{r}
+library(stringr)
+
+my_ships <- c("Millenium Falcon",
+              "X-Wing",
+              "Tie-Fighter",
+              "Death Star")
+
+str_detect(my_ships, pattern = "r")
+
+```
+
+
+## Using str_deteck package 
+```{r}
+phrase <- "I love burritos"
+
+if (str_detect(phrase, "love")) {
+  print("burrito fan!")
+}
+```
+
+## Using 'switch' statement
+
+```{r}
+species <- "mouse"
+
+switch (species,
+        "cat" = print("meow"),
+        "dog" = print("woof"),
+        "mouse" = print("squeak"))
+)
+```
+
+```{r}
+species <- "mouse"
+
+if (str_detect(species, "cat")){
+  print("meow")
+} else if (str_detect(species, "dog")) {
+  print("woof")
+} else if (str_detect(species, "mo")) print("squeak")
+```
+
+## For Loop
+
+```{r}
+dog_names <- c("Teddy", "Khora", "Banjo", "Waffle")
+
+for (pupster in dog_names) {
+  print(paste0("My dog's name is ", pupster, "."))
+}
+```
+
+```{r}
+mass <- seq(from = 0, to = 3, by = 0.5)
+
+mass_1 <- mass[1]
+
+for (i in mass){
+  new_value <- i + 2
+print(new_value)
+}
+
+```
+
+```{r}
+mass <- seq(from = 0, to = 3, by = 0.5)
+
+for (i in seq_along(mass)) {
+  new_value <- mass[i] + 2
+  print(new_value)
+}
+```
+
+```{r}
+tree_height <- c(1,2,6,10)
+
+for (i in seq_along(tree_height)) {
+  new_value <- tree_height[i] + tree_height[i + 1]
+ print(new_value)
+}
+
+i <- 1
+tree_height[i] + tree_height[i + 1]
+
+```
+
+```{r}
+animal <- c("cat", "dog", "dog", "zebra", "dog")
+
+for (i in seq_along(animal))
+if (animal[i] == "dog") {
+  print("I love dogs")
+} else
+  print("this is not a dog")
+```
+
+```{r}
+species <- c("dog", "elephant", "goat", "dog", "dog", "elephant")
+
+age_human <- c(3, 8, 4, 6, 12, 18)
+
+for (i in seq_along(species)) { 
+  if (species[i] == "dog") {
+  animal_age <- age_human[i] * 7
+} else if (species[i] == "elephant") {
+  animal_age <- age_human[i] * 0.88
+} else if (species[i] == "goat") {
+  animal_age <- age_human[i] * 4.7
+}
+  print(animal_age)
+}
+```
+
+
+## Storing for loop ouput ----
+
+```{r}
+# create an empty vector for animal ages
+
+species <- c("dog", "elephant", "goat", "dog", "dog", "elephant")
+
+animal_ages <- vector(mode = "numeric", length = length(species))
+
+age_human <- c(3, 8, 4, 6, 12, 18)
+
+for (i in seq_along(species)) {
+if (species[i] == "dog") {
+  animal_age <- age_human[i] * 7
+} else if (species[i] == "elephant") {
+  animal_age <- age_human[i] * 0.88
+} else if (species[i] == "goat") {
+  animal_age <- age_human[i] * 4.7
+}
+  animal_ages[i] <- animal_age 
+}
+
+animal_ages
+```
+
+```{r}
+tigers <- c(29, 34, 82)
+lions <- c(2, 18, 6)
+
+big_cats <- vector(mode = "numeric", length = length(tigers))
+
+for (i in seq_along(tigers)) {
+  total_cats <- tigers[i] + lions[i]
+  big_cats[i] <- total_cats
+}
+
+
+
+total_cats <- tigers[i] + lions[i]
+```
+
+```{r}
+mean_mtcars <- vector(mode = "numeric", length = ncol(mtcars))
+
+mean_value <- mean(mtcars[[1]], na.rm = TRUE)
+mean_mtcars[i] <- mean_value
+
+for (i in 1:ncol(mtcars)) {
+  mean_value <- mean(mtcars[[i]], na.rm = TRUE)
+mean_mtcars[i] <- mean_value
+}
+mean_mtcars
+```
+
+
+```{r}
+# library(palmerpenguins)
+
+if (is.numeric(penguins[[3]])) {
+  penguin_median <- median(penguins[[3]], na.rm = TRUE)
+  print(penguin_median)
+} else {
+  print("non-numeric column")
+}
+
+
+
+for (i in seq_along(penguins)) {   ## for this data
+  if (is.numeric(penguins[[i]])) {    ## if these conditions met
+  penguin_median <- median(penguins[[i]], na.rm = TRUE) # do this function
+  print(penguin_median) # and print the results
+} else {  #otherwise 
+  print("non-numeric column") ##print other 
+}
+}
+
+```
+
+```{r}
+apply(X = mtcars, MARGIN = 2, FUN = mean)
+```
+
+```{r}
+library(tidyverse)
+
+penguins %>% 
+  group_by(species) %>% 
+  summarise(across(where(is.numeric), mean, na.rm = TRUE))
+
+```
+
+```{r}
+library(purrr)
+
+map(.x = mtcars, .f = mean)
+map_df(.x = mtcars, .f = mean)
+```
+
+
